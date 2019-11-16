@@ -45,5 +45,9 @@ extension DetailViewController {
         viewModel.description.asObservable()
                 .bind(to: self.textView.rx.text)
                 .disposed(by: self.disposeBag)
+
+        viewModel.title.asObservable()
+                .bind(to: self.navigationItem.rx.title)
+                .disposed(by: self.disposeBag)
     }
 }

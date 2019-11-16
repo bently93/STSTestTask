@@ -10,6 +10,7 @@ import RxSwift
 
 protocol DetailViewModelProtocol {
     // MARK: - Variable
+    var title: Variable<String?> { get }
     var description: Variable<String?> { get }
 
     // MARK: - PublishSubject
@@ -21,6 +22,7 @@ protocol DetailViewModelProtocol {
 
 final class DetailViewModel: DetailViewModelProtocol {
     // MARK: - Variable
+	private(set) var title: Variable<String?> = Variable("")
 	private(set) var description: Variable<String?> = Variable("")
 
     // MARK: - PublishSubject
@@ -32,6 +34,7 @@ final class DetailViewModel: DetailViewModelProtocol {
 
     // MARK: - Initialization
     init(data: AnyDataProtocol) {
+        self.title.value = String(describing: type(of: data))
 		self.description.value = data.getDescription(isOneLine: false)
 	}
 }

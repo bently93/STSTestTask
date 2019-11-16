@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DataServiceProtocol {
-
+    func getDataArray()-> [AnyDataProtocol]
 }
 
 class DataService: DataServiceProtocol {
@@ -24,7 +24,13 @@ class DataService: DataServiceProtocol {
 
 // MARK: - Override functions
 extension DataService {
-    
+    func getDataArray()-> [AnyDataProtocol] {
+        var result: [AnyDataProtocol] = []
+        for _ in 0...Int.random(in: 10...100) {
+            result.append(self.dataRepo.getData())
+        }
+        return result
+    }
 }
 
 // MARK: - Private functions

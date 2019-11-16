@@ -19,7 +19,7 @@ extension AnyDataProtocol {
                 return ""
             }
             let value = unwrap(child.value)
-            result += "\(name): \(value)\(isOneLine ? ";" : "\n")"
+            result += "\(name): \(value)\(isOneLine ? "; " : "\n")"
         }
         return result
     }

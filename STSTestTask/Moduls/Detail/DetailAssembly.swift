@@ -11,17 +11,17 @@ import EasyDi
 class DetailViewModelAssembly: Assembly {
     private lazy var serviceAssembly: ServiceAssembly = self.context.assembly()
 
-    var detailViewModel: DetailViewModelProtocol {
-        return define(init: DetailViewModel())
+    func getDetailViewModel(data: AnyDataProtocol)-> DetailViewModelProtocol {
+        return define(init: DetailViewModel(data: data))
     }
 }
 
 class DetailViewAssembly: Assembly {
     private lazy var viewModelAssembly: DetailViewModelAssembly = self.context.assembly()
 
-    func inject(into vc: DetailViewController) {
+    func inject(into vc: DetailViewController, data: AnyDataProtocol) {
         defineInjection(into: vc) {
-            $0.viewModel = self.viewModelAssembly.detailViewModel
+            $0.viewModel = self.viewModelAssembly.getDetailViewModel(data: data)
             return $0
         }
     }

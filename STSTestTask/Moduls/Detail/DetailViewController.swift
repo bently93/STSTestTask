@@ -13,9 +13,12 @@ import RxCocoa
 class DetailViewController: UIViewController {
 
     // MARK: - IB Outlets
+    @IBOutlet weak var textView: UITextView!
 
     var viewModel: DetailViewModelProtocol?
-    
+
+    var data: AnyDataProtocol?
+
     // MARK: - Private properties
     private let disposeBag = DisposeBag()
 
@@ -23,7 +26,10 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DetailViewAssembly.instance().inject(into: self)
+        guard let data = self.data else {
+            return assertionFailure()
+        }
+        DetailViewAssembly.instance().inject(into: self, data: data)
 
         setupViewBindings()
     }
@@ -35,22 +41,9 @@ extension DetailViewController {
         guard let viewModel = self.viewModel else {
             return assertionFailure("viewModel doesnt set")
         }
-    }
-}
 
-extension DetailViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case "":
-//                if let viewController = segue.destination as? AnyViewController,
-//                    let data = sender as? Any {
-//                    viewController.data = data
-//                }
-                break
-            default:
-                break
-            }
-        }
+        viewModel.description.asObservable()
+                .bind(to: self.textView.rx.text)
+                .disposed(by: self.disposeBag)
     }
 }

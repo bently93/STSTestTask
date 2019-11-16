@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hpp-Cv-x07">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hpp-Cv-x07">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="KEq-Lx-GZ8">
             <objects>
-                <viewController id="hpp-Cv-x07" customClass="DetailViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hpp-Cv-x07" customClass="DetailViewController" customModule="STSTestTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l7R-of-Gxu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ORA-fE-9JY">
+                                <rect key="frame" x="16" y="16" width="343" height="635"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UpA-ms-q58" firstAttribute="bottom" secondItem="ORA-fE-9JY" secondAttribute="bottom" constant="16" id="5dN-na-QJ9"/>
+                            <constraint firstItem="ORA-fE-9JY" firstAttribute="top" secondItem="UpA-ms-q58" secondAttribute="top" constant="16" id="WBy-LK-tvn"/>
+                            <constraint firstItem="UpA-ms-q58" firstAttribute="trailing" secondItem="ORA-fE-9JY" secondAttribute="trailing" constant="16" id="s9r-dY-3Zx"/>
+                            <constraint firstItem="ORA-fE-9JY" firstAttribute="leading" secondItem="UpA-ms-q58" secondAttribute="leading" constant="16" id="z0V-hd-WpD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="UpA-ms-q58"/>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="ORA-fE-9JY" id="VyG-h5-f8p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQM-mY-4fC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="141"/>
+            <point key="canvasLocation" x="213.59999999999999" y="139.880059970015"/>
         </scene>
     </scenes>
 </document>

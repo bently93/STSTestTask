@@ -31,6 +31,16 @@ class MainViewController: UIViewController {
         setupViewBindings()
         setupTableView()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
 }
 
 // MARK: - Private functions
@@ -50,12 +60,11 @@ extension MainViewController {
                 }
                 .disposed(by: self.disposeBag)
 
-//        tableView.rx.modelSelected(NewsEntity.self)
-//                .subscribe(onNext: { [unowned self] news in
-//                    self.perform(segue: StoryboardSegue.Search.showWebViewController, sender: news)
-//                })
-//                .disposed(by: disposeBag)
-
+        tableView.rx.modelSelected(AnyDataProtocol.self)
+                .subscribe(onNext: { [unowned self] data in
+                    self.performSegue(withIdentifier: "showDetailView", sender: data)
+                })
+                .disposed(by: disposeBag)
     }
 }
 
@@ -63,11 +72,11 @@ extension MainViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "":
-//                if let viewController = segue.destination as? AnyViewController,
-//                    let data = sender as? Any {
-//                    viewController.data = data
-//                }
+            case "showDetailView":
+                if let viewController = segue.destination as? DetailViewController,
+                    let data = sender as AnyObject as? AnyDataProtocol {
+                    viewController.data = data
+                }
                 break
             default:
                 break

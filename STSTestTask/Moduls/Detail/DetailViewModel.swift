@@ -5,10 +5,12 @@
 //  Created by n.leontiev on 16/11/2019.
 //  Copyright © 2019 user. All rights reserved.
 //
+
 import RxSwift
 
 protocol DetailViewModelProtocol {
     // MARK: - Variable
+    var description: Variable<String?> { get }
 
     // MARK: - PublishSubject
 
@@ -18,34 +20,28 @@ protocol DetailViewModelProtocol {
 }
 
 final class DetailViewModel: DetailViewModelProtocol {
-	// MARK: - Variable
+    // MARK: - Variable
+	private(set) var description: Variable<String?> = Variable("")
 
     // MARK: - PublishSubject
 
-	// MARK: - Public properties
+    // MARK: - Public properties
 
-	// MARK: - Properties
-	private let disposeBag = DisposeBag()
+    // MARK: - Properties
+    private let disposeBag = DisposeBag()
 
-	// MARK: - Initialization
-	init(){
-		setupView()
-		setupBindings()
-	}	
+    // MARK: - Initialization
+    init(data: AnyDataProtocol) {
+		self.description.value = data.getDescription(isOneLine: false)
+	}
 }
 
 // MARK: - Override public functions
-extension DetailViewModel{
-	
+extension DetailViewModel {
+
 }
 
 // MARK: - Private functions
-extension DetailViewModel{
-	private func setupView() {
+extension DetailViewModel {
 
-	}
-
-	private func setupBindings() {
-
-	}
 }

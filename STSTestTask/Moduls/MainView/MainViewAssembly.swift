@@ -12,7 +12,7 @@ class MainViewModelAssembly: Assembly {
     private lazy var serviceAssembly: ServiceAssembly = self.context.assembly()
 
     var mainViewModel: MainViewModelProtocol {
-        return define(init: MainViewModel())
+        return define(init: MainViewModel(dataService: self.serviceAssembly.dataService))
     }
 }
 

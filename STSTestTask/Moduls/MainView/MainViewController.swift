@@ -14,6 +14,8 @@ class MainViewController: UIViewController {
 
     // MARK: - IB Outlets
 
+    @IBOutlet weak var tableView: UITableView!
+
     // MARK: - Properties
     var viewModel: MainViewModelProtocol?
     
@@ -27,6 +29,7 @@ class MainViewController: UIViewController {
         MainViewAssembly.instance().inject(into: self)
 
         setupViewBindings()
+        setupTableView()
     }
 }
 
@@ -36,6 +39,23 @@ extension MainViewController {
         guard let viewModel = self.viewModel else {
             return assertionFailure("viewModel doesnt set")
         }
+    }
+
+    func setupTableView() {
+        viewModel?.dataArray.asObservable()
+                .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) {
+                    (_, result: AnyDataProtocol, cell: UITableViewCell) in
+                    cell.textLabel?.text = String(describing: type(of: result))
+                    cell.detailTextLabel?.text = result.getDescription(isOneLine: true)
+                }
+                .disposed(by: self.disposeBag)
+
+//        tableView.rx.modelSelected(NewsEntity.self)
+//                .subscribe(onNext: { [unowned self] news in
+//                    self.perform(segue: StoryboardSegue.Search.showWebViewController, sender: news)
+//                })
+//                .disposed(by: disposeBag)
+
     }
 }
 

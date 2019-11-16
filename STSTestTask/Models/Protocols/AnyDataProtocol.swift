@@ -6,11 +6,11 @@
 import Foundation
 
 protocol AnyDataProtocol {
-    func getDescription()->String
+    func getDescription(isOneLine: Bool)->String
 }
 
 extension AnyDataProtocol {
-    func getDescription()->String {
+    func getDescription(isOneLine: Bool)->String {
         let reflected = Mirror(reflecting: self)
         var result = ""
 
@@ -19,7 +19,7 @@ extension AnyDataProtocol {
                 return ""
             }
             let value = unwrap(child.value)
-            result += "\(name): \(value) \n"
+            result += "\(name): \(value)\(isOneLine ? ";" : "\n")"
         }
         return result
     }

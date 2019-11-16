@@ -21,7 +21,7 @@ final class DataRepository: DataRepositoryProtocol {
     init(){
         self.move = Move()
         self.event = Event()
-        self.notice = Notice()
+        self.notice = Notice(flightDate: Date(), gate: "Gate 1")
     }
 }
 

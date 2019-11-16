@@ -9,7 +9,7 @@ import EasyDi
 class ServiceAssembly: Assembly {
     private lazy var repoAssembly: RepoAssembly = self.context.assembly()
 
-    var dataSettingsService: DataServiceProtocol {
+    var dataService: DataServiceProtocol {
         return define(init: DataService(dataRepo: self.repoAssembly.dataRepo))
     }
 }
